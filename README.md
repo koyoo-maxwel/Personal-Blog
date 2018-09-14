@@ -40,3 +40,60 @@ sudo apt-get install python3.6-venv
 python3.6 -m venv virtual
 source virtual/bin/activate
 '''
+
+### Install dependancies
+
+Install dependancies that will create an environment for the app to run
+`pip install -r requirements`
+
+### Prepare environment variables
+
+```bash
+export DATABASE_URL='postgresql+psycopg2://<your-username>:<your-password>@localhost/carblog'
+export SECRET_KEY='Your secret key'
+export DATABASE_URL_TEST='postgresql+psycopg2://<your-username>:<your-password>@localhost/carblog_test'
+export MAIL_SERVER='smtp.googlemail.com'
+export MAIL_PORT=587
+export MAIL_USE_TLS=1
+export MAIL_USERNAME=<your-email>
+export MAIL_PASSWORD=<your-password>
+```
+
+``
+
+### Run Database Migrations
+
+```bash
+python manage.py db init
+python manage.py db migrate -m "initial migration"
+python manage.py db upgrade
+```
+
+### Running the app in development
+
+In the same terminal type:
+`python3 manage.py server`
+
+Open the browser on `http://localhost:5000/`
+
+## Known bugs
+
+Sending batch emails bug
+If others are found, E-mail me at [koyoo maxwel](koyoomaxwel@gmail.com)
+
+## Technologies used
+
+    - Python 3.6
+    - HTML
+    - Bootstrap 4
+    - JavaScript
+    - Heroku
+    - Postgresql
+
+## Support and contact details
+
+Contact me on developer[koyoo-maxwel](koyoomaxwel@mail.com) for any comments, reviews or advice.
+
+### License
+
+Copyright (c) [license](LICENSE)
