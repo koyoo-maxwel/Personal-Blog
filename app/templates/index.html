@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+
+
+{% block content%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ title }}</title>
+    </head>
+    <body style="background-image:url('http://static.digg.com/images/cfbcc8017b904a0e9ab23c72bed00252_2a910f968f6048b3b63a0bac618580b5_header.jpeg' );"no-repeat>
+       
+    <div class="row">
+            <div class="col-md-4">
+        {% for pitch in pitches %}
+        
+                <div class="panel panel-default">
+                    <div class="panel-heading"><h4>Category: {{ pitch.category }}</h4></div>
+                        <div class="panel-body">
+                            <p> {{ pitch.title }}</p>
+                            <p>{{ pitch.content }} </p>
+                            </div>
+                        </div>
+    
+         {% endfor %}
+        </div>
+    </div>
+    </body>
+</html>
+{% endblock content%}

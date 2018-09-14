@@ -1,0 +1,4 @@
+Hello {{ user.username}}
+Welcome to the pitch!
+We would like to appreciate you for signing up to the pitch plateform, feel free to air your greatest pich ideas here. Always at your service  - the pich.
+
