@@ -14,7 +14,6 @@ login_manager.login_view = 'auth.login'
 
 bootstrap = Bootstrap()
 db = SQLAlchemy()
-photos = UploadSet('photos', IMAGES)
 mail = Mail()
 
 
@@ -37,7 +36,5 @@ def create_app(config_name):
     from .auth import auth as auth_blueprint
     app.register_blueprint(auth_blueprint,url_prefix = '/auth')
 
-    # configure UploadSet
-    configure_uploads(app,photos)
 
     return app 
