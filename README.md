@@ -23,3 +23,20 @@ Get the specs [here](https://github.com/koyoo-maxwel/Personal-Blog/blob/master/S
 
     - Python 3.6
     - Ubuntu software
+
+`Clone the Repo`
+
+> Run the following command on the terminal:
+`git clone https://github.com/koyoo-maxwel/Personal-Blog.git && cd Personal-Blog`
+
+Install [Postgres](https://www.postgresql.org/download/)
+
+### Create a Virtual Environment
+
+Run the following commands in the same terminal:
+'''bash
+
+sudo apt-get install python3.6-venv
+python3.6 -m venv virtual
+source virtual/bin/activate
+'''
