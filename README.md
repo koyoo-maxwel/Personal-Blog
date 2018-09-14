@@ -96,4 +96,4 @@ Contact me on developer[koyoo-maxwel](koyoomaxwel@mail.com) for any comments, re
 
 ### License
 
-Copyright (c) [license](LICENSE)
+Copyright (c) [license](license)
