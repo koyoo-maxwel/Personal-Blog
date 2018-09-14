@@ -18,7 +18,7 @@ class Config:
     
 
 class ProdConfig(Config):
-    SQLALCHEMY_DATABASE_URI = os.environ.get("HEROKU_POSTGRESQL_SILVER_URL")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("HEROKU_POSTGRESQL_GOLD_URL")
 
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://student:1209@localhost/pitchit'
