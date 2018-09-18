@@ -13,9 +13,9 @@ class UpdateProfile(FlaskForm):
 
 
 class BlogForm(FlaskForm):
-    title = StringField('Blog title',validators=[Required()])
+    title = StringField('Your name',validators=[Required()])
     content = StringField('content',validators=[Required()])
-    category = SelectField('Category', choices=[('Choose...', 'health'),('social', 'politicat'),('technology', 'business')])
+    category = SelectField('Category', choices=[('Choose...', 'choose'),('entertainment', 'entertainment'),('business', 'business')])
     submit = SubmitField('Submit')
 
 
