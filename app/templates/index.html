@@ -3,10 +3,11 @@
 
 {% block content%}
 
-<div class="container" style="padding-top:70px;">
+<body style="background-color:#B6B0AE  ;">
 
-    <h4>Blog Master<p><a href="/blog/new">Blog on this amazing articles</a></p>
-    </h4>
+<div class="container" style="padding-top:50px; margin-top: 80px">
+    
+       
     <div class="row">
 
         {% for blog in blogs %}
@@ -20,9 +21,9 @@
                     <p> {{ blog.title }}</p>
                     <p>{{ blog.content }} </p>
                     <p>{{ blog.posted}}</p>
-                    <div class="panel-footer">comment <a href="/blog/{{blog.id}}">Here</a>
+                    <div class="panel-footer">
                     {% if current_user.is_authenticated %}
-                   <p>delete:<a href="/delete/{{blog.id}}">Delete Blog</a></p>
+                   <p><a href="/blog/{{blog.id}}"> <button class="btn btn-primary btn-sm">Comment</button> </a> <a href="/delete/{{blog.id}}"> <button class="btn btn-warning btn-sm">Delete</button> </a></p>
                    </div>
                    {% endif %}
                 </div>

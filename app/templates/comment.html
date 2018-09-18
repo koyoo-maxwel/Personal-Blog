@@ -1,8 +1,17 @@
-{% extends 'base.html' %} {% import 'bootstrap/wtf.html' as wtf %}
+{% extends 'base.html' %} {% import "bootstrap/wtf.html" as wtf %}
+
 {% block content %}
 
-<div class="container" style="text-align:center; padding-top:40px;">
-    <h1>Blogs</h1>
+<body style="background-color:darkgrey;"
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+
+
+        </div>
+        <div class="col-md-6">
+            <h1>Blogs</h1>
     <article class="media content-section">
         <div class="media-body">
             <div class="article-metadata">
@@ -17,9 +26,9 @@
     </article>
 
 
-    {{wtf.quick_form(blog_form)}}
+    {{wtf.quick_form(blogform)}}
 
-    {% for comment in comments[::-1] %}
+    {% for comment in comments %}
 
 
     <article class="">
@@ -30,7 +39,7 @@
             </div>
             <p class="article-content">{{ comment.comment }}</p>
             {% if current_user.is_authenticated %}
-            <p>Want to delete:<a href="/remove/{{comment.id}}">Delete comment</a></p>
+            <p></p>Don't likethis!<a href="/remove/{{comment.id}}">Delete comment</a></p>
             </div>
             {% endif %}
 
@@ -38,6 +47,15 @@
 
     </article>
     {% endfor %}
+
+        </div>
+        <div class="col-md-3">
+
+
+        </div>
+
+    </div>
+
 
 </div>
 {% endblock content %}
