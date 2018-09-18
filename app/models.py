@@ -2,7 +2,7 @@ from . import db
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
 from . import login_manager
-from datetime import datetime
+from datetime import datetime 
 
 
 @login_manager.user_loader
@@ -11,18 +11,24 @@ def load_user(user_id):
 
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
+
     id = db.Column(db.Integer,  primary_key = True)
     username = db.Column(db.String(255))
-    role_id = db.Column(db.Integer,db.ForeignKey('roles.id'))
     email = db.Column(db.String(255),unique = True, index =True)
     bio = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
     pass_secure = db.Column(db.String(255))
 
- 
+    blogs = db.relationship('Blog',backref = 'author',lazy="dynamic") 
+    comments = db.relationship('Comment', backref = 'author', lazy = "dynamic")
+    
+    def save_user(self, user):
+        db.session.add(user)
+        db.session.commit()
+
     @property
     def password(self):
-        raise AttributeError(' Sorry cannot read the password attribute')
+        raise AttributeError('You cannot read the password attribute')
 
     @password.setter
     def password(self, password):
@@ -35,60 +41,80 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'User {self.username} {self.bio} {self.email}'
 
-
-class Role(db.Model):
-    __tablename__ = 'roles'
-
-    id = db.Column(db.Integer,primary_key = True)
-    name = db.Column(db.String(255))
-
-
-    users = db.relationship('User',backref = 'role',lazy="dynamic")
-
-
-    def __repr__(self):
-        return f'User {self.name}'
-
-
-
-class Blog(UserMixin,db.Model):
-    
+class Blog(db.Model):
     __tablename__ = 'blog'
 
-    id = db.Column(db.Integer, primary_key=True)
-    post = db.Column(db.String(255))
-    body = db.Column(db.String(1000))
-    category = db.Column(db.String(1000))
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255))
+    posted = db.Column(db.DateTime,default=datetime.utcnow)
+    content = db.Column(db.String(255))
+    category = db.Column(db.String(255))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+    comments = db.relationship('Comment',backref = 'blog',lazy="dynamic")
 
-    
-    comments = db.relationship('Comment',backref = 'Blog',lazy = "dynamic")
-
-    
     def save_blog(self):
         db.session.add(self)
         db.session.commit()
 
-class Comment(UserMixin,db.Model):
-    
-    __tablename__ = 'comments'
+    @classmethod
+    def get_blog(cls,id):
+        blogs = Blog.query.filter_by(blog_id=id).all()
+        return blogs
 
-    id = db.Column(db.Integer, primary_key=True)
-    poster = db.Column(db.String(255))
-    comment = db.Column(db.String(1000))
-    date_posted = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    def delete_blog(self):
+        db.session.query(Blog).delete()
+        db.session.commit() 
+
+    def __repr__(self):
+        return f'User {self.title}'
+
+class Comment(db.Model):
+    __tablename__= 'comments'
+
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(255))
+    comment = db.Column(db.String(255))
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
-    blog_id = db.Column(db.Integer, db.ForeignKey("blog.id"))
-  
+    blog_id = db.Column(db.Integer,db.ForeignKey('blog.id'))
 
-        
     def save_comment(self):
         db.session.add(self)
-        db.session.commit()  
+        db.session.commit()
+
+    @classmethod
+    def get_comment(cls,id):
+        comments = Comment.query.filter_by(comment_id=id).all()
+        return comments 
+
+    def delete_comment(self):
+        db.session.query(Comment).delete()
+        db.session.commit()    
+
+    def __repr__(self):
+        return f'Comment{self.title}'  
 
 
+class Subscribe(UserMixin, db.Model):
+    __tablename__="subscribe"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255))
+    title = db.Column(db.String(255))
+    email = db.Column(db.String(255),unique = True,index = True)
 
 
+    def save_subscribe(self):
+        db.session.add(self)
+        db.session.commit()
+
+    @classmethod
+    def get_subscribe(cls,id):
+        return Subscribe.query.all()
+         
+
+    def __repr__(self):
+        return f'User {self.email}'
+
+    
 
 

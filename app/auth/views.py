@@ -29,8 +29,6 @@ def logout():
     return redirect(url_for("main.index")) 
 
 
-
-
 @auth.route('/register',methods = ["GET","POST"])
 def register():
     form = RegistrationForm()
@@ -39,8 +37,12 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        mail_message("welcome to you best pitch!","email/welcome_user",user.email,user=user)
+        mail_message("Welcome to Blog app","email/welcome_user",user.email,user=user)
 
         return redirect(url_for('auth.login'))
-        title = "New User"
+        title = "New Account"
+
+
     return render_template('auth/register.html',registration_form = form)
+
+    

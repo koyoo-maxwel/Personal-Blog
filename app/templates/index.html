@@ -2,50 +2,34 @@
 
 
 {% block content%}
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>{{ title }}</title>
-    </head>
-    <body style="background-image:url('http://sfwallpaper.com/images/free-background-wallpaper-11.jpg' );"no-repeat>
-   
-        {{ super() }}
-        <link rel="stylesheet" href="{{url_for('static',filename='js/script.js')}}">
-        <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
 
-        <!-- icon library -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <!--my fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
-        </head>
-        <body style="background-color:darkslategrey">
-           
-        <div class="row">
-            <div class="col-md-4">
-            {% for Blog in Blogs %}
-            
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><h4>Category: {{ Blog.category }}</h4></div>
-                            <div class="panel-body">
-                                <p style="color:red" >{{ Blog.post }}</p>
-                                <p> {{ Blog.title }}</p>
-                                <p>{{Blog.body}}</p>
-                                
-                                <p><a href="{{url_for('main.comment')}}">Rate it</a>
-                                <i onclick="myFunction(this)" class="fa fa-thumbs-up"></i>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
+<div class="container" style="padding-top:70px;">
+
+    <h4>Do you want to add a blog:<p><a href="/blog/new">Add here</a></p>
+    </h4>
+    <div class="row">
+
+        {% for blog in blogs %}
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4>Category: {{ blog.category }}</h4>
                 </div>
-                {% endfor %}
 
-                
+                <div class="panel-body">
+                    <p> {{ blog.title }}</p>
+                    <p>{{ blog.content }} </p>
+                    <p>{{ blog.posted}}</p>
+                    <div class="panel-footer">Add a comment <a href="/blog/{{blog.id}}">Here</a>
+                    {% if current_user.is_authenticated %}
+                   <p>Want to delete:<a href="/delete/{{blog.id}}">Delete Blog</a></p>
+                   </div>
+                   {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
 
-
-
-                    
-    </body>
-</html>
+    </div>
+</div>
 {% endblock content%}
-

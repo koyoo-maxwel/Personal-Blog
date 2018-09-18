@@ -1,6 +1,6 @@
-export SECRET_KEY='blogstream01'
-export MAIL_USERNAME='koyoomaxwel@gmail.com'
-export MAIL_PASSWORD='12091995malindi?'
-export FLASK_ENV=development
+export SECRET_KEY=adm2432
+export MAIL_USERNAME='koyoomaxwel@juantechno.com'
+export MAIL_PASSWORD='Juantechno1209'
 
-python3 manage.py server
+
+python3 manage.py server 
