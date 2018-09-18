@@ -59,7 +59,6 @@ def update_pic(uname):
     return redirect(url_for('main.profile',uname=uname))
 
 @main.route('/blog/new', methods=['GET', 'POST'])  
-@login_required
 def newblog():
     form= BlogForm()
 
