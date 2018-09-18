@@ -15,9 +15,9 @@ app = Flask(__name__)
 @main.route("/")
 def index():
     '''
-    title = "Welcome to my personal blog"
+    title = "welcome to blog master"
     '''
-    title = 'Welcome to my personal blog'
+    title = 'welcome to blog master'
     blogs = Blog.query.all()
 
     return render_template('index.html', title= title, blogs = blogs)
@@ -85,12 +85,12 @@ def new_blog():
             mail_message("New Blog", "email/welcome_subscribe", sub.email)
             return redirect(url_for('main.index'))
 
-        print('yvonne')
-        flash('Creating blog has been successful!')
+        
+        flash('Created successfully!')
         return redirect(url_for('main.single_blog', id = blog.id))
 
 
-    return render_template('newB.html', title='New Blog',blog_form = form, legend = 'New Blog')
+    return render_template('newblog.html', title='New Blog',blog_form = form, legend = 'New Blog')
 
 @main.route('/blog/new/<int:id>')
 def single_blog(id):
