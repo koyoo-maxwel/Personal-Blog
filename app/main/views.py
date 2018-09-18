@@ -8,10 +8,6 @@ from .. import db,photos
 from ..email import mail_message
 
 
-app = Flask(__name__)
-
-
-# views
 @main.route("/")
 def index():
     
@@ -91,9 +87,9 @@ def newblog():
 
     return render_template('newblog.html', title='New Blog',blogform = form, blog = 'New Blog')
 
-@main.route('/blog/new')
-def single_blog(id):
-    blog = Blog.query.get(id)
+@main.route('/blog/new/')
+def single_blog():
+    blog = Blog.query.all()
     return render_template('moreblog.html', blog = blog)
 
 @main.route('/delete/<int:id>')
