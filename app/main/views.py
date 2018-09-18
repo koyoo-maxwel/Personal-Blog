@@ -14,15 +14,14 @@ app = Flask(__name__)
 # views
 @main.route("/")
 def index():
-    '''
-    title = "welcome to blog master"
-    '''
+    
     title = 'welcome to blog master'
     blogs = Blog.query.all()
 
     return render_template('index.html', title= title, blogs = blogs)
 
 @main.route('/user/<uname>')
+@login_required
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
 
@@ -65,7 +64,7 @@ def update_pic(uname):
 
 @main.route('/blog/new', methods=['GET', 'POST'])  
 @login_required
-def new_blog():
+def newblog():
     form= BlogForm()
 
     if form.validate_on_submit():
@@ -87,15 +86,15 @@ def new_blog():
 
         
         flash('Created successfully!')
-        return redirect(url_for('main.single_blog', id = blog.id))
+        return redirect(url_for('main.newblog', id = blog.id))
 
 
-    return render_template('newblog.html', title='New Blog',blog_form = form, legend = 'New Blog')
+    return render_template('newblog.html', title='New Blog',blogform = form, blog = 'New Blog')
 
-@main.route('/blog/new/<int:id>')
+@main.route('/blog/new')
 def single_blog(id):
     blog = Blog.query.get(id)
-    return render_template('singleBlog.html', blog = blog)
+    return render_template('moreblog.html', blog = blog)
 
 @main.route('/delete/<int:id>')
 @login_required
@@ -116,13 +115,13 @@ def blog(blog_id):
     if form.validate_on_submit():
         title = form.title.data 
         comment = form.comment.data 
-        new_blog_comment = Comment(title = title,comment=comment,blog_id = blog_id)
+        newblog_comment = Comment(title = title,comment=comment,blog_id = blog_id)
 
-        db.session.add(new_blog_comment) 
+        db.session.add(newblog_comment) 
         db.session.commit()
 
     comments = Comment.query.filter_by(blog_id=blog_id)
-    return render_template('comment_blog.html', title = 'blog', blog =blog, blog_form = form, comments = comments) 
+    return render_template('comment.html', title = 'You||best blog', blog =blog, blogform = form, comments = comments) 
 
 @main.route('/remove/<int:id>')
 @login_required
@@ -130,7 +129,7 @@ def remove(id):
     del_comment = Comment.query.get(id)
     db.session.delete(del_comment)
     db.session.commit()
-    return redirect(url_for('main.new_blog.html'))
+    return redirect(url_for('main.newblog.html'))
 
 @main.route('/subscribe/', methods=['GET','POST'])
 def subscribe():
