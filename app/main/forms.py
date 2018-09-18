@@ -3,22 +3,21 @@ from wtforms import StringField,TextAreaField,SubmitField,SelectField,Validation
 from wtforms.validators import Required,Email
 from ..models import Subscribe
 
-class BlogForm(FlaskForm):
-    title = StringField('Blog title',validators=[Required()])
-    content = StringField('content',validators=[Required()])
-    category = SelectField('Category', choices=[('Choose Category', 'Choose Category'),('emotional', 'emotional'),('skills', 'skills')])
-    review = TextAreaField('pitch review', validators=[Required()])
-    submit = SubmitField('Submit')
 
-class CommentForm(FlaskForm):
-    
-    title = StringField('Comment title',validators=[Required()])
-    comment = TextAreaField('comment', validators=[Required()])
-    submit = SubmitField('Submit')    
+
+
 
 class UpdateProfile(FlaskForm):
     bio = TextAreaField('Please, tell us something about you.',validators = [Required()])
     submit = SubmitField('Submit')
+
+
+class BlogForm(FlaskForm):
+    title = StringField('Blog title',validators=[Required()])
+    content = StringField('content',validators=[Required()])
+    category = SelectField('Category', choices=[('Choose...', 'health'),('social', 'politicat'),('technology', 'business')])
+    submit = SubmitField('Submit')
+
 
 class SubscribeForm(FlaskForm):
     email = StringField('Your Email Address',validators=[Required(),Email()])
@@ -27,4 +26,12 @@ class SubscribeForm(FlaskForm):
 
     def validate_email(self,data_field):
                 if Subscribe.query.filter_by(email =data_field.data).first():
-                    raise ValidationError('Sorry, there is an account with that email')
+                    raise ValidationError('Sorry!, there is an account with that email')
+
+
+
+class CommentForm(FlaskForm):
+    
+    title = StringField('Comment title',validators=[Required()])
+    comment = TextAreaField('comment', validators=[Required()])
+    submit = SubmitField('Submit')    

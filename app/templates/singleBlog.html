@@ -2,15 +2,9 @@
 {% block content %}
 <div class="jumbotron">
     <div class="container">
-        <br>
-        <br>
-
-        <br>
-
-        <br>
-
-        <button type="button" class="btn btn-outline-primary"><a href="/blog/new">New Pitch</a></button>
-        <a href="/">Go back home</a>
+       <hr>
+        <button type="button" class="btn btn-outline-primary"><a href="/blog/new">Lates</a></button>
+        <a href="/">Home</a>
         <br>
         <br>
 
@@ -18,12 +12,14 @@
         <div class="card border-secondary mb-3" style="max-width: 18rem;">
             <div class="card-header">
                 <h5>{{ blog.title }}</h5>
+                
 
             </div>
 
             <div class="card-body text-secondary">
 
                 <p class="card-text">{{blog.content}}</p>
+                <p>{{ blog.posted}}</p>
 
                 <br>
 
