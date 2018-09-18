@@ -49,9 +49,9 @@ Install dependancies that will create an environment for the app to run
 ### Prepare environment variables
 
 ```bash
-export DATABASE_URL='postgresql+psycopg2://<your-username>:<your-password>@localhost/carblog'
+export DATABASE_URL='postgresql+psycopg2://<your-username>:<your-password>@localhost/blog'
 export SECRET_KEY='Your secret key'
-export DATABASE_URL_TEST='postgresql+psycopg2://<your-username>:<your-password>@localhost/carblog_test'
+export DATABASE_URL_TEST='postgresql+psycopg2://<your-username>:<your-password>@localhost/blogtest'
 export MAIL_SERVER='smtp.googlemail.com'
 export MAIL_PORT=587
 export MAIL_USE_TLS=1
