@@ -1,5 +1,5 @@
-export SECRET_KEY=adm2432
-export MAIL_USERNAME='koyoomaxwel@juantechno.com'
+export SECRET_KEY=ASDFGHJKL1234567890CDSHCVB
+export MAIL_USERNAME='juantechno.marketing@gmail.com'
 export MAIL_PASSWORD='Juantechno1209'
 
 
