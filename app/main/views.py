@@ -8,6 +8,7 @@ from .. import db,photos
 from ..email import mail_message
 
 
+
 @main.route("/")
 def index():
     
@@ -59,6 +60,7 @@ def update_pic(uname):
     return redirect(url_for('main.profile',uname=uname))
 
 @main.route('/blog/new', methods=['GET', 'POST'])  
+@login_required
 def newblog():
     form= BlogForm()
 
@@ -86,9 +88,9 @@ def newblog():
 
     return render_template('newblog.html', title='New Blog',blogform = form, blog = 'New Blog')
 
-@main.route('/blog/new/')
-def single_blog():
-    blog = Blog.query.all()
+@main.route('/blog/new')
+def single_blog(id):
+    blog = Blog.query.get(id)
     return render_template('moreblog.html', blog = blog)
 
 @main.route('/delete/<int:id>')
